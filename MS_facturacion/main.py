@@ -7,7 +7,6 @@ from waitress import serve
 from Controladores.ControladorCliente import ControladorCliente
 
 
-
 #print("Mobile planet")
 
 app = Flask(__name__)
@@ -23,13 +22,29 @@ def test():
     json["massage"] = "Server Running ..."
     return jsonify(json)
 
-
-######################################Servicios Clientes####################################################
+ ######################################Servicios Clientes####################################################
 # 1.listar todas los clientes
 @app.route("/clientes",methods=['GET'])
 def getClientes():
     json = miControladorCliente.index()
     return jsonify(json)
+
+
+
+#listar cliente por id
+@app.route("/clientes/<string:id>",methods=['GET'])
+def getCliente(id):
+    json = miControladorCliente.show(id)
+    return jsonify(json)
+
+#Crear
+@app.route("/clientes",methods=['POST'])
+def createCliente():
+    data = request.get_json()
+    json = miControladorCliente.create(data)
+    return jsonify(json)
+
+#Actualiza
 
 
 

@@ -8,7 +8,7 @@ class ControladorCliente():
 
     def index(self):
         print("listar todos los Clientes esto sale solo en la consola")
-        # codigo para simular lo que a futuro se mostrara
+        # codigo para simular lo que a futuro se mostrara Datos quemados
         unCliente = {
             "id": "1234",
             "nombre": "Juan",
@@ -19,12 +19,11 @@ class ControladorCliente():
         }
         return [unCliente]
 
+
     def create(self, elCliente):
-        print("Crear un cliente")
-        elCliente =Cliente(elCliente)
-
-        return elCliente.__init__()
-
+        print("creando un cliente ;-)")
+        elCliente = Cliente(elCliente)
+        return elCliente.__dict__
 
 
     def show(self, id):
@@ -39,10 +38,10 @@ class ControladorCliente():
         }
         return elCliente
 
-    def update(self, id , elCliente):
+    def update(self, id, elCliente):
         print(" Actualizando una cliente con id", id)
         elCliente =Cliente(elCliente)
-        return elCliente.__init__
+        return elCliente.__dict__
 
     def delete(self, id):
         print("Eliminando cliente con id ", id)
