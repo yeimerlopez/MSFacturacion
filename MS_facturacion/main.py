@@ -37,14 +37,26 @@ def getCliente(id):
     json = miControladorCliente.show(id)
     return jsonify(json)
 
-#Crear
+#Crear cliente
 @app.route("/clientes",methods=['POST'])
 def createCliente():
     data = request.get_json()
     json = miControladorCliente.create(data)
     return jsonify(json)
 
-#Actualiza
+#Actualiza un cliente
+@app.route("/clientes/<string:id>",methods=['PUT'])
+def modificarCliente(id):
+    data = request.get_json()
+    json = miControladorCliente.update(id,data)
+    return jsonify(json)
+
+# Elimina un estudiante
+@app.route("/clientes/<string:id>",methods=['DELETE'])
+def eliminarCliente(id):
+    json = miControladorCliente.delete(id)
+    return jsonify(json)
+
 
 
 
