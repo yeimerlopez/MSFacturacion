@@ -1,4 +1,9 @@
 {
   "url-backend":"127.0.0.1",
-  "port":9999
+  "port":9999,
+
+  "data-db-connection": "mongodb+srv://usuario-pruebas:2dVaecS4EIv9tEeD@cluster0.foqcwxh.mongodb.net/bd-microservicio-facturacion?retryWrites=true&w=majority",
+  "name-db": "bd-microservicio-facturacion"
+
+
 }

@@ -1,9 +1,11 @@
 
 from Modelos.Cliente import Cliente
+from Repositorios.repositorioCliente import RepositorioCliente
 
 class ControladorCliente():
     def __init__(self):
         print("creando controlador Cliente")
+        self.repositorioCliente = RepositorioCliente()
 
 
     def index(self):
@@ -22,8 +24,8 @@ class ControladorCliente():
 
     def create(self, elCliente):
         print("creando un cliente ;-)")
-        elCliente = Cliente(elCliente)
-        return elCliente.__dict__
+        nuevoCliente = Cliente(elCliente)
+        return self.repositorioCliente.save(nuevoCliente)
 
 
     def show(self, id):
