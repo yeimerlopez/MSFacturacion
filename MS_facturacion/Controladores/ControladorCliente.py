@@ -10,16 +10,7 @@ class ControladorCliente():
 
     def index(self):
         print("listar todos los Clientes esto sale solo en la consola")
-        # codigo para simular lo que a futuro se mostrara Datos quemados
-        unCliente = {
-            "id": "1234",
-            "nombre": "Juan",
-            "apellido": "Perez",
-            "telefono": "123456789",
-            "email": "plsgq@example.com",
-            "direccion": "Calle 123",
-        }
-        return [unCliente]
+        return self.repositorioCliente.findAll()
 
 
     def create(self, elCliente):
