@@ -21,23 +21,31 @@ class ControladorCliente():
 
     def show(self, id):
         print("Mostrando un Cliente con id", id)
-        elCliente = {
-            "id": "1234",
-            "nombre": "Juan",
-            "apellido": "Perez",
-            "telefono": "123456789",
-            "email": "plsgq@example.com",
-            "direccion": "Calle 123",
-        }
-        return elCliente
+        elCliente = Cliente(self.repositorioCliente.findById(id))
+        return elCliente.__dict__
+
 
     def update(self, id, elCliente):
         print(" Actualizando una cliente con id", id)
-        elCliente =Cliente(elCliente)
+
+        clienteActual = Cliente(self.repositorioCliente.findById(id))
+        clienteActual.nombre = elCliente["nombre"]
+        clienteActual.direccion = elCliente["direccion"]
+        clienteActual.telefono = elCliente["telefono"]
+        return self.repositorioCliente.save(clienteActual)
+
+
+
+
+
+        elCliente = Cliente(elCliente)
         return elCliente.__dict__
 
     def delete(self, id):
         print("Eliminando cliente con id ", id)
-        return {"deleted_count": 1 }
+        return self.repositorioCliente.delete(id)
+
+
+
 
 
