@@ -1,40 +1,63 @@
 from Repositorios.repositorioVenta import RepositorioVenta
-#from Repositorios.repositorioCliente import RepositorioCliente
 from Modelos.Venta import Venta
-#from Modelos.Cliente import Cliente
+from Repositorios.repositorioFactura import RepositorioFactura
+from Modelos.Factura import Factura
+from Repositorios.repositorioProducto import RepositorioProducto
+from Modelos.Producto import Producto
+
+
 
 
 class ControladorVenta():
     def __init__(self):
         print("creando controlador venta")
         self.repositorioVenta = RepositorioVenta()
-        #self.repositorioCliente = RepositorioCliente()
+        self.repositorioFactura = RepositorioFactura()
+        self.repositorioProducto = RepositorioProducto()
 
     def index(self):
         print("listar todos las ventas")
         return self.repositorioVenta.findAll()
 
-    def create(self, laVenta):
-        print("Crear una Venta")
-        nuevoVenta = Venta(laVenta)
+    """
+    Asignacion factura y producto a venta  V
+    
+    """
+    def create(self, infoVenta, id_factura, id_producto):
+        nuevoVenta = Venta(infoVenta)
+        lafactura = Factura(self.repositorioFactura.findById(id_factura))
+        elproducto = Producto(self.repositorioProducto.findById(id_producto))  # repositorio materias estaba en plural
+        nuevoVenta.factura = lafactura
+        nuevoVenta.producto = elproducto
         return self.repositorioVenta.save(nuevoVenta)
 
     def show(self, id):
-        print("Mostrando una venta con id", id)
         laVenta = Venta(self.repositorioVenta.findById(id))
         return laVenta.__dict__
 
+    """
+        Modificación de inscripción (estudiante y materia)              
 
-    def update(self, id , laventa):
-        print(" Actualizando un producto con id", id)
 
-        ventaActual = Venta(self.repositorioVenta.findById(id))
-        ventaActual.cantidad = laventa["cantidad"]
-        #ventaActual.xxxxx = laventa["xxxxx"]
-        #ventaActual.xxxxx = laventa["xxxxx"]
-        return self.repositorioVenta.save(ventaActual)
+    """
 
+    def update(self, id, infoVenta, id_factura, id_producto):
+        laVenta = Venta(self.repositorioVenta.findById(id))
+        laVenta.fecha = infoVenta["fecha"]
+        laVenta.precio = infoVenta["precio"]
+        laFactura = Factura(self.repositorioFactura.findById(id_factura))
+        elProducto = Producto(self.repositorioProducto.findById(id_producto))
+        laVenta.factura = laVenta
+        laVenta.producto = laVenta
+        return self.repositorioVenta.save(laVenta)
 
     def delete(self, id):
-        print("Eliminando la venta con id ", id)
         return self.repositorioVenta.delete(id)
+
+    """
+    Obtener todos los inscritos en una materia
+    """
+
+    def listarInscritosEnproducto(self, id_producto):
+        return self.repositorioProducto.getListadoInscritosEnProducto(id_producto)
+

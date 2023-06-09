@@ -138,6 +138,21 @@ def modificarProducto(id):
 def eliminarProducto(id):
     json = miControladorProducto.delete(id)
     return jsonify(json)
+
+"""
+# A. asignar un cliente a producto  (departamento a materia )(partido a candidato)
+@app.route("/candidatos/<string:id>/partidos/<string:id_partido>",methods=['PUT'])
+def asignarClienteAProducto(id,id_cliente):
+    json = miControladorProducto.asignarCliente(id,id_cliente)
+    return jsonify(json)
+"""
+
+
+
+
+
+
+
  ##################################################################################################
  ######################################Servicios Ventas ###########################################
 #listar todos las ventas
@@ -152,18 +167,18 @@ def getVenta(id):
     json = miControladorVenta.show(id)
     return jsonify(json)
 
-#Crear venta
-@app.route("/ventas",methods=['POST'])
-def createVenta():
+
+@app.route("/ventas/factura/<string:id_factura>/producto/<string:id_producto>",methods=['POST'])
+def crearVentas(id_factura,id_producto):
     data = request.get_json()
-    json = miControladorVenta.create(data)
+    json = miControladorVenta.create(data,id_factura,id_producto)
     return jsonify(json)
 
 #Actualiza una venta
-@app.route("/ventas/<string:id>",methods=['PUT'])
-def modificarVenta(id):
+@app.route("/ventas/<string:id_venta>/factura/<string:id_factura>/producto/<string:id_producto>",methods=['PUT'])
+def modificarVenta(id_venta, id_factura, id_producto):
     data = request.get_json()
-    json = miControladorVenta.update(id,data)
+    json = miControladorVenta.update(id_venta, data, id_factura, id_producto)
     return jsonify(json)
 
 #Elimina una Venta
@@ -171,6 +186,10 @@ def modificarVenta(id):
 def eliminarVenta(id):
     json = miControladorVenta.delete(id)
     return jsonify(json)
+
+
+
+
 ###################################################################################################
 
 

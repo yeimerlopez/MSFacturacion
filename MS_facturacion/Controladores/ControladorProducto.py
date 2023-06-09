@@ -40,15 +40,16 @@ class ControladorProducto():
         return self.repositorioProducto.delete(id)
 
 
-"""
-    # relacion producto y clientes
+
+    # relacion  clientes y producto
+
     def asignarCliente(self, id, id_cliente):
         productoActual = Producto(self.repositorioProducto.findById(id))
         clienteActual = Cliente(self.repositorioCliente.findById(id_cliente))
-        productoActual.Cliente = clienteActual
+        productoActual.cliente = clienteActual
         return self.repositorioProducto.save(productoActual)
 
-"""
+
 
 
 

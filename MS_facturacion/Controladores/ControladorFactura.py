@@ -27,7 +27,6 @@ class ControladorFactura():
 
     def update(self, id , lafactura):
         print(" Actualizando una factura con id", id)
-
         facturaActual = Factura(self.repositorioFactura.findById(id))
         facturaActual.fecha = lafactura["fecha"]
         #ventaActual.xxxxx = laventa["xxxxx"]
