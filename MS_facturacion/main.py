@@ -5,6 +5,9 @@ from flask_cors import CORS
 import json
 from waitress import serve
 from Controladores.ControladorCliente import ControladorCliente
+from Controladores.ControladorFactura import ControladorFactura
+from Controladores.ControladorProducto import ControladorProducto
+from Controladores.ControladorVenta import ControladorVenta
 
 
 #print("Mobile planet")
@@ -14,6 +17,9 @@ cors = CORS(app)
 
 # En esta linea estoy instanciando el controlador de cliente
 miControladorCliente = ControladorCliente()
+miControladorFactura = ControladorFactura()
+miControladorProducto = ControladorProducto()
+miControladorVenta = ControladorVenta()
 
 
 @app.route("/",methods=['GET'])
@@ -22,14 +28,54 @@ def test():
     json["massage"] = "Server Running ..."
     return jsonify(json)
 
- ######################################Servicios Clientes####################################################
-# 1.listar todas los clientes
+def loadFileConfig():
+    with open('config.json') as f:
+        data = json.load(f)
+    return data
+
+
+
+ ######################################Servicios Facturas############################################
+#listar todos las factura
+@app.route("/facturas",methods=['GET'])
+def getFacturas():
+    json = miControladorFactura.index()
+    return jsonify(json)
+
+#listar factura por id
+@app.route("/facturas/<string:id>",methods=['GET'])
+def getFactura(id):
+    json = miControladorFactura.show(id)
+    return jsonify(json)
+
+#Crear factura
+@app.route("/facturas",methods=['POST'])
+def createFactura():
+    data = request.get_json()
+    json = miControladorFactura.create(data)
+    return jsonify(json)
+
+#Actualiza una factura
+@app.route("/facturas/<string:id>",methods=['PUT'])
+def modificarFactura(id):
+    data = request.get_json()
+    json = miControladorFactura.update(id,data)
+    return jsonify(json)
+
+#Elimina una factura
+@app.route("/facturas/<string:id>",methods=['DELETE'])
+def eliminarFactura(id):
+    json = miControladorFactura.delete(id)
+    return jsonify(json)
+ #####################################################################################################
+
+
+ ######################################Servicios Clientes############################################
+#listar todos los clientes
 @app.route("/clientes",methods=['GET'])
 def getClientes():
     json = miControladorCliente.index()
     return jsonify(json)
-
-
 
 #listar cliente por id
 @app.route("/clientes/<string:id>",methods=['GET'])
@@ -51,20 +97,92 @@ def modificarCliente(id):
     json = miControladorCliente.update(id,data)
     return jsonify(json)
 
-# Elimina un estudiante
+#Elimina un estudiante
 @app.route("/clientes/<string:id>",methods=['DELETE'])
 def eliminarCliente(id):
     json = miControladorCliente.delete(id)
     return jsonify(json)
+###################################################################################################
+
+
+
+ ######################################Servicios Productos#########################################
+#listar todos los productos
+@app.route("/productos",methods=['GET'])
+def getProductos():
+    json = miControladorProducto.index()
+    return jsonify(json)
+
+#listar producto por id
+@app.route("/productos/<string:id>",methods=['GET'])
+def getProducto(id):
+    json = miControladorProducto.show(id)
+    return jsonify(json)
+
+#Crear producto
+@app.route("/productos",methods=['POST'])
+def createProducto():
+    data = request.get_json()
+    json = miControladorProducto.create(data)
+    return jsonify(json)
+
+#Actualizar un producto
+@app.route("/productos/<string:id>",methods=['PUT'])
+def modificarProducto(id):
+    data = request.get_json()
+    json = miControladorProducto.update(id,data)
+    return jsonify(json)
+
+#Elimina un producto
+@app.route("/productos/<string:id>",methods=['DELETE'])
+def eliminarProducto(id):
+    json = miControladorProducto.delete(id)
+    return jsonify(json)
+ ##################################################################################################
+ ######################################Servicios Ventas ###########################################
+#listar todos las ventas
+@app.route("/ventas",methods=['GET'])
+def getVentas():
+    json = miControladorVenta.index()
+    return jsonify(json)
+
+#listar venta por id
+@app.route("/ventas/<string:id>",methods=['GET'])
+def getVenta(id):
+    json = miControladorVenta.show(id)
+    return jsonify(json)
+
+#Crear venta
+@app.route("/ventas",methods=['POST'])
+def createVenta():
+    data = request.get_json()
+    json = miControladorVenta.create(data)
+    return jsonify(json)
+
+#Actualiza una venta
+@app.route("/ventas/<string:id>",methods=['PUT'])
+def modificarVenta(id):
+    data = request.get_json()
+    json = miControladorVenta.update(id,data)
+    return jsonify(json)
+
+#Elimina una Venta
+@app.route("/ventas/<string:id>",methods=['DELETE'])
+def eliminarVenta(id):
+    json = miControladorVenta.delete(id)
+    return jsonify(json)
+###################################################################################################
+
+
+
+
+
+
 
 
 
 
 #función para leer el archivo de configuración
-def loadFileConfig():
-    with open('config.json') as f:
-        data = json.load(f)
-    return data
 
 if __name__ == '__main__':
     dataConfig = loadFileConfig()
