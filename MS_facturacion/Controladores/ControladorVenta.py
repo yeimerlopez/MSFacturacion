@@ -55,9 +55,11 @@ class ControladorVenta():
         return self.repositorioVenta.delete(id)
 
     """
-    Obtener todos los inscritos en una materia
+    Obtener todos LOS PRODUCTOS EN LAS VENTAS
     """
 
-    def listarInscritosEnproducto(self, id_producto):
-        return self.repositorioProducto.getListadoInscritosEnProducto(id_producto)
+    #def listarVentasxproducto(self, id_producto):
+    def ListarInscritosEnMateria(self, id_producto):
+        return self.repositorioVenta.getListadoIncritosEnMateria(id_producto)
+
 

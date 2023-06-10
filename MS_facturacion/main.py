@@ -187,6 +187,10 @@ def eliminarVenta(id):
     json = miControladorVenta.delete(id)
     return jsonify(json)
 
+@app.route("/ventas/producto/<string:id_producto>",methods=['GET'])
+def inscritosEnMateria(id_producto):
+    json = miControladorVenta.ListarInscritosEnMateria(id_producto)
+    return jsonify(json)
 
 
 
