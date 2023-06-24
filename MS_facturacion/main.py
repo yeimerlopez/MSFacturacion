@@ -62,6 +62,8 @@ def modificarFactura(id):
     json = miControladorFactura.update(id,data)
     return jsonify(json)
 
+
+
 #Elimina una factura
 @app.route("/facturas/<string:id>",methods=['DELETE'])
 def eliminarFactura(id):

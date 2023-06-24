@@ -29,7 +29,7 @@ class ControladorProducto():
         print(" Actualizando un producto con id", id)
 
         productoActual = Producto(self.repositorioProducto.findById(id))
-        #productoActual.nombre = elproducto["nombre"]
+        productoActual.nombre = elproducto["nombre"]
         productoActual.descripcion = elproducto["descripcion"]
         productoActual.precio = elproducto["precio"]
         return self.repositorioProducto.save(productoActual)

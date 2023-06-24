@@ -1,6 +1,5 @@
-
-from Modelos.Cliente import Cliente
 from Repositorios.repositorioCliente import RepositorioCliente
+from Modelos.Cliente import Cliente
 
 class ControladorCliente():
     def __init__(self):

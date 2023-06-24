@@ -1,7 +1,6 @@
 from Repositorios.repositorioFactura import RepositorioFactura
-#from Repositorios.repositorioCliente import RepositorioCliente
 from Modelos.Factura import Factura
-#from Modelos.Cliente import Cliente
+
 
 
 class ControladorFactura():
@@ -25,13 +24,19 @@ class ControladorFactura():
         return laFactura.__dict__
 
 
-    def update(self, id , lafactura):
+    def update(self, id , laFactura):
         print(" Actualizando una factura con id", id)
         facturaActual = Factura(self.repositorioFactura.findById(id))
-        facturaActual.fecha = lafactura["fecha"]
-        #ventaActual.xxxxx = laventa["xxxxx"]
-        #ventaActual.xxxxx = laventa["xxxxx"]
-        return self.repositoriofactura.save(facturaActual)
+        facturaActual.fecha = laFactura["fecha"]
+        facturaActual.direccionEntrega = laFactura["direccionEntrega"]
+        facturaActual.metodoPago= laFactura["metodoPago"]
+        return self.repositorioFactura.save(facturaActual)
+
+
+
+# ventaActual.xxxxx = laventa["xxxxx"]
+# ventaActual.xxxxx = laventa["xxxxx"]
+
 
 
     def delete(self, id):
